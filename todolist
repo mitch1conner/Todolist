@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+class Task {
+private:
+    map<string, string> myMap;
+
+public:
+    string desc;
+    bool completed;
+
+    Task(string desc, bool completed) : desc(desc), completed(completed) {}
+
+    void addTask(string desc) {
+        myMap[desc] = "Not Done";
+    }
+
+    void taskDone(string desc) {
+        if (myMap.find(desc) != myMap.end()) {
+            myMap[desc] = "Done";
+            cout << "Task marked as done: " << desc << endl;
+        } else {
+            cout << "Task not found: " << desc << endl;
+        }
+    }
+
+    void showTask() {
+        cout << "Task List:" << endl;
+        for (const auto& pair : myMap) {
+            cout << pair.first << ": " << pair.second << endl;
+        }
+    }
+};
+
+int main() {
+    Task myTask("Example Task", false);
+
+    myTask.addTask("Task 1");
+    myTask.addTask("Task 2");
+    myTask.showTask();
+
+    myTask.taskDone("Task 1");
+    myTask.showTask();
+
+    return 0;
+}
